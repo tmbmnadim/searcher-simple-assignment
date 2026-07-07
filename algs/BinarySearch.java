@@ -1,34 +1,36 @@
 package algs;
 import java.util.Scanner;
 
-public class BinarySearch {
+public class BinarySearch extends Searcher {
     private int[] items;
     public BinarySearch(int[] items){
         this.items = items;
     }
     
-    public void search(int key) {
+    @Override
+    public int search(int key) {
         if(items.length < 1) {
             System.out.println("Cannot Search in an empty list");
-            return;
+            return -1;
         }
         if(items.length == 1) {
             System.out.println("Value in 0th index");
-            return;
+            return 0;
         }
         int start = 0;
         int end = items.length - 1;
         while (start < end) {
             int mid = start + (end - start) / 2;
-            System.out.printf("START: %02d | MID: %02d | END: %02d | KEY: %02d\n", start, mid, end, key);
             if(items[mid] == key){
                 System.out.println("Value in " + mid + " index");
-                break;
+                return mid;
             } else if (key < items[mid]) {
                 end = mid - 1;
             } else {
                 start = mid + 1;
             }
         }
+        System.out.println("Value not found");
+        return -1;
     }
 }
