@@ -1,6 +1,6 @@
 package algs;
 
-public class LinearSearch extends Searcher {
+public class LinearSearch implements Searcher {
     private int[] items;
     public LinearSearch(int[] items){
         this.items = items;

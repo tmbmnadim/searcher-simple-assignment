@@ -1,7 +1,6 @@
 package algs;
-import java.util.Scanner;
 
-public class BinarySearch extends Searcher {
+public class BinarySearch implements Searcher {
     private int[] items;
     public BinarySearch(int[] items){
         this.items = items;

@@ -1,5 +1,5 @@
 package algs;
 
-public abstract class Searcher {
+public interface Searcher {
     public abstract int search(int key);
 }
