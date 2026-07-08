@@ -1,8 +1,10 @@
 import algs.*;
 import input.UserInput;
+import stopwatch.Stopwatch;
 
 class Main {
     public static void main(String[] args) {
+        Stopwatch stopwatch = new Stopwatch();
         UserInput ui = new UserInput();
 
         int choice = ui.getInputForSearchAlgs();
@@ -22,7 +24,9 @@ class Main {
         }
         
         searcher.search(key);
+        double time = stopwatch.elapsedTime();
+        System.out.printf("Elapsed time: %.5f\n",time);
 
-        // ui.dispose();
+        ui.dispose();
     }
 }
