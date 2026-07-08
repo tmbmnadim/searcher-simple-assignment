@@ -8,18 +8,20 @@ public class UserInput {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getInputForSearchAlgs() {
+    public int getInputForSearchAlgs(String[] options) {
         // SHOWING OPTIONS FOR SEARCH ALGORITHMS
         System.out.println("Choose which algorithm you want to use:");
-        System.out.println("  1. Linear Search");
-        System.out.println("  2. Binary Search");
+        for (String option : options) {
+            System.out.println(option);
+        }
+
         System.out.println("Input: ");
         
         // TAKING INPUT FOR SEARCH ALGORITHM CHOICE
         String choice = scanner.nextLine();
         int i = 0;
-        while(choice.trim().isEmpty() || (!choice.equals("1") && !choice.equals("2"))) {
-            System.out.println("Please enter a valid choice (1 or 2):");
+        while(choice.trim().isEmpty() || !choice.matches("\\d+")) {
+            System.out.println("Please enter a valid choice (1-" + options.length + "):");
             choice = scanner.nextLine();
             i++;
             if(i > 2) {
@@ -27,7 +29,7 @@ public class UserInput {
                 System.exit(1);
             }
         }
-        return Integer.parseInt(choice);
+        return Integer.parseInt(choice) - 1;
     }
 
     public int[] getInputForArray() {
