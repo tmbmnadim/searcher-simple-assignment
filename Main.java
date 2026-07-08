@@ -8,9 +8,7 @@ class Main {
     public static void main(String[] args) {
         UserInput ui = new UserInput();
 
-        String[] algorithms = SearchAlgorithm.getListStrings();
-
-        int choice = ui.getInputForSearchAlgs(algorithms);
+        int choice = ui.getInputForSearchAlgs(SearchAlgorithm.getListStrings());
 
         SearchAlgorithm choosen = SearchAlgorithm.values()[choice];
         System.out.println("Your choice: " + choosen.getlabel());
