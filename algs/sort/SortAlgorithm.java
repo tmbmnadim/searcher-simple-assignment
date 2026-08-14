@@ -1,8 +1,10 @@
-package algs;
+package algs.sort;
 import java.util.function.Function;
 
 public enum SortAlgorithm {
-    BUBBLE("Linear Search", BubbleSort::new);
+    BUBBLE("Bubble Sort", BubbleSort::new),
+    INSERTION("Insertion Sort", InsertionSort::new),
+    SELECTION("Selection Sort", SelectionSort::new);
 
     final String label;
     final Function<int[], Sorter> factory;

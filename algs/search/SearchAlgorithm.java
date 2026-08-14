@@ -1,4 +1,4 @@
-package algs;
+package algs.search;
 import java.util.function.Function;
 
 public enum SearchAlgorithm {

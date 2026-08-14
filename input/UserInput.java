@@ -9,7 +9,7 @@ public class UserInput {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getInputForSearchAlgs(String[] options) {
+    public int getInputForChoices(String[] options) {
         // SHOWING OPTIONS FOR SEARCH ALGORITHMS
         System.out.println("Choose which algorithm you want to use:");
         for (String option : options) {
@@ -56,10 +56,18 @@ public class UserInput {
         // return new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
     }
 
-    public int getInputForKey() {
-        System.out.println("Enter the key to search for:");
-        int key = scanner.nextInt();
-        return key;
+    public Integer getInputForKey() {
+        try {
+            System.out.println("Enter the key to search for (type 'q' to exit):");
+            String line = scanner.nextLine().trim();
+            if (line.equalsIgnoreCase("q") || line.equalsIgnoreCase("exit")) {
+                return null;
+            }
+            return Integer.parseInt(line);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid integer or 'q' to exit.");
+            return getInputForKey();
+        }
     }
 
     public void dispose() {

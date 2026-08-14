@@ -1,4 +1,4 @@
-package algs;
+package algs.search;
 
 public class BinarySearch implements Searcher {
     private int[] items;
@@ -13,7 +13,7 @@ public class BinarySearch implements Searcher {
             return -1;
         }
         if(items.length == 1) {
-            System.out.println("Value in 0th index");
+            System.out.println("Item found at index: 0");
             return 0;
         }
         int start = 0;
@@ -21,7 +21,7 @@ public class BinarySearch implements Searcher {
         while (start < end) {
             int mid = start + (end - start) / 2;
             if(items[mid] == key){
-                System.out.println("Value in " + mid + " index");
+                System.out.println("Item found at index: " + mid);
                 return mid;
             } else if (key < items[mid]) {
                 end = mid - 1;
@@ -29,7 +29,7 @@ public class BinarySearch implements Searcher {
                 start = mid + 1;
             }
         }
-        System.out.println("Value not found");
+        System.out.println("Item not found");
         return -1;
     }
 }

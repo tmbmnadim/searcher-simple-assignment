@@ -1,4 +1,4 @@
-package algs;
+package algs.search;
 
 public class LinearSearch implements Searcher {
     private int[] items;
@@ -10,11 +10,11 @@ public class LinearSearch implements Searcher {
     public int search(int key) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == key) {
-                System.out.println("Value in " + i + " index");
+                System.out.println("Item found at index: " + i);
                 return i;
             }
         }
-        System.out.println("Value not found");
+        System.out.println("Item not found");
         return -1;
     }
 }

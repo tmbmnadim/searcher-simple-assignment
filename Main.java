@@ -1,5 +1,6 @@
 
-import algs.*;
+import algs.search.*;
+import algs.sort.*;
 import input.UserInput;
 import stopwatch.Stopwatch;
 
@@ -11,10 +12,10 @@ class Main {
         String[] algs = { "1. Search", "2. Sort" };
 
         int choice = 0;
-        int algsChoice = ui.getInputForSearchAlgs(algs);
+        int algsChoice = ui.getInputForChoices(algs);
 
         if (algsChoice == 0) {
-            choice = ui.getInputForSearchAlgs(SearchAlgorithm.getListStrings());
+            choice = ui.getInputForChoices(SearchAlgorithm.getListStrings());
 
             SearchAlgorithm choosen = SearchAlgorithm.values()[choice];
             System.out.println("Your choice: " + choosen.getlabel());
@@ -22,14 +23,15 @@ class Main {
             int[] items = ui.getInputForArray();
             Searcher searcher = choosen.create(items);
 
-            int key = ui.getInputForKey();
+            Integer key = ui.getInputForKey();
 
-            Stopwatch stopwatch = new Stopwatch();
-            searcher.search(key);
-            double time = stopwatch.elapsedTime();
-            System.out.printf("Elapsed time: %.5f\n", time);
+            while (key != null) {
+                searcher.search(key);
+
+                key = ui.getInputForKey();
+            }
         } else if (algsChoice == 1) {
-            choice = ui.getInputForSearchAlgs(SortAlgorithm.getListStrings());
+            choice = ui.getInputForChoices(SortAlgorithm.getListStrings());
 
             SortAlgorithm choosen = SortAlgorithm.values()[choice];
             System.out.println("Your choice: " + choosen.getlabel());
@@ -37,10 +39,10 @@ class Main {
             int[] items = ui.getInputForArray();
             Sorter sorter = choosen.create(items);
 
-            Stopwatch stopwatch = new Stopwatch();
-            sorter.sort();
-            double time = stopwatch.elapsedTime();
-            System.out.printf("Elapsed time: %.5f\n", time);
+            sorter.sortAsc();
+            sorter.print();
+
+            
         } else {
             System.out.println("Invalid choice");
         }
