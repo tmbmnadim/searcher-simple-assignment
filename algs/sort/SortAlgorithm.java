@@ -4,7 +4,10 @@ import java.util.function.Function;
 public enum SortAlgorithm {
     BUBBLE("Bubble Sort", BubbleSort::new),
     INSERTION("Insertion Sort", InsertionSort::new),
-    SELECTION("Selection Sort", SelectionSort::new);
+    SELECTION("Selection Sort", SelectionSort::new),
+    MERGE("Merge Sort", MergeSort::new),
+    COUNTING("Counting Sort", CountingSort::new),
+    RADIX("Radix Sort", RadixSort::new);
 
     final String label;
     final Function<int[], Sorter> factory;
@@ -25,11 +28,10 @@ public enum SortAlgorithm {
         return factory.apply(items);
     }
 
-    public static String[] getListStrings() {
+    public static String[] getLabels() {
         String[] algorithms = new String[values().length];
         for (int i = 0; i < algorithms.length; i++) {
-            SortAlgorithm alg = values()[i];
-            algorithms[i] = alg.getId() + ". " + alg.getlabel();
+            algorithms[i] = values()[i].getlabel();
         }
         return algorithms;
     }

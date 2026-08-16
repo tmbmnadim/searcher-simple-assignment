@@ -9,11 +9,11 @@ public class UserInput {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getInputForChoices(String[] options) {
-        // SHOWING OPTIONS FOR SEARCH ALGORITHMS
-        System.out.println("Choose which algorithm you want to use:");
-        for (String option : options) {
-            System.out.println(option);
+    public int getInputForChoices(String prompt, String[] options) {
+        // SHOWING OPTIONS TO CHOOSE FROM
+        System.out.println(prompt);
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
         }
 
         System.out.println("Type the number you want to select: ");
@@ -21,7 +21,8 @@ public class UserInput {
         // TAKING INPUT FOR SEARCH ALGORITHM CHOICE
         String choice = scanner.nextLine();
         int i = 0;
-        while (choice.trim().isEmpty() || !choice.matches("\\d+")) {
+        while (choice.trim().isEmpty() || !choice.matches("\\d+")
+                || Integer.parseInt(choice) < 1 || Integer.parseInt(choice) > options.length) {
             System.out.println("Please enter a valid choice (1-" + options.length + "):");
             choice = scanner.nextLine();
             i++;
@@ -56,16 +57,19 @@ public class UserInput {
         // return new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
     }
 
-    public Integer getInputForKey() {
+    public KeyResult getInputForKey() {
+        System.out.println("Enter the key to search for ('m' for Main Menu, 'q' to Quit):");
+        String line = scanner.nextLine().trim();
+        if (line.equalsIgnoreCase("q") || line.equalsIgnoreCase("quit")) {
+            return KeyResult.ofQuit();
+        }
+        if (line.equalsIgnoreCase("m") || line.equalsIgnoreCase("menu")) {
+            return KeyResult.ofMainMenu();
+        }
         try {
-            System.out.println("Enter the key to search for (type 'q' to exit):");
-            String line = scanner.nextLine().trim();
-            if (line.equalsIgnoreCase("q") || line.equalsIgnoreCase("exit")) {
-                return null;
-            }
-            return Integer.parseInt(line);
+            return KeyResult.ofKey(Integer.parseInt(line));
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid integer or 'q' to exit.");
+            System.out.println("Invalid input. Please enter a valid integer, 'm' for Main Menu, or 'q' to Quit.");
             return getInputForKey();
         }
     }
@@ -79,5 +83,10 @@ public class UserInput {
         System.out.println("Enter the elements of the array (space-separated):");
         String input = scanner.nextLine();
         return input;
+    }
+
+    public void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

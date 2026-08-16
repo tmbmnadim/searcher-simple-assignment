@@ -24,11 +24,10 @@ public enum SearchAlgorithm {
         return factory.apply(items);
     }
 
-    public static String[] getListStrings() {
+    public static String[] getLabels() {
         String[] algorithms = new String[values().length];
         for (int i = 0; i < algorithms.length; i++) {
-            SearchAlgorithm alg = values()[i];
-            algorithms[i] = alg.getId() + ". " + alg.getlabel();
+            algorithms[i] = values()[i].getlabel();
         }
         return algorithms;
     }
