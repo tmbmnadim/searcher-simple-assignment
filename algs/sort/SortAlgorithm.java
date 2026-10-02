@@ -8,6 +8,7 @@ public enum SortAlgorithm {
     MERGE("Merge Sort", MergeSort::new),
     QUICK("Quick Sort", QuickSort::new),
     HEAP("Heap Sort", HeapSort::new),
+    COUNTING("Counting Sort", CountingSort::new),
     RADIX("Radix Sort", RadixSort::new);
 
     final String label;
@@ -29,11 +30,10 @@ public enum SortAlgorithm {
         return factory.apply(items);
     }
 
-    public static String[] getListStrings() {
+    public static String[] getLabels() {
         String[] algorithms = new String[values().length];
         for (int i = 0; i < algorithms.length; i++) {
-            SortAlgorithm alg = values()[i];
-            algorithms[i] = alg.getId() + ". " + alg.getlabel();
+            algorithms[i] = values()[i].getlabel();
         }
         return algorithms;
     }
