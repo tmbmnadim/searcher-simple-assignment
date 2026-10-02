@@ -4,7 +4,11 @@ import java.util.function.Function;
 public enum SortAlgorithm {
     BUBBLE("Bubble Sort", BubbleSort::new),
     INSERTION("Insertion Sort", InsertionSort::new),
-    SELECTION("Selection Sort", SelectionSort::new);
+    SELECTION("Selection Sort", SelectionSort::new),
+    MERGE("Merge Sort", MergeSort::new),
+    QUICK("Quick Sort", QuickSort::new),
+    HEAP("Heap Sort", HeapSort::new),
+    RADIX("Radix Sort", RadixSort::new);
 
     final String label;
     final Function<int[], Sorter> factory;
