@@ -10,8 +10,12 @@ public class UserInput {
     }
 
     public int getInputForChoices(String[] options) {
+        return getInputForChoices("Choose which algorithm you want to use:", options);
+    }
+
+    public int getInputForChoices(String prompt, String[] options) {
         // SHOWING OPTIONS FOR SEARCH ALGORITHMS
-        System.out.println("Choose which algorithm you want to use:");
+        System.out.println(prompt);
         for (String option : options) {
             System.out.println(option);
         }
@@ -21,7 +25,7 @@ public class UserInput {
         // TAKING INPUT FOR SEARCH ALGORITHM CHOICE
         String choice = scanner.nextLine();
         int i = 0;
-        while (choice.trim().isEmpty() || !choice.matches("\\d+")) {
+        while (!isValidChoice(choice, options.length)) {
             System.out.println("Please enter a valid choice (1-" + options.length + "):");
             choice = scanner.nextLine();
             i++;
@@ -30,7 +34,7 @@ public class UserInput {
                 System.exit(1);
             }
         }
-        return Integer.parseInt(choice) - 1;
+        return Integer.parseInt(choice.trim()) - 1;
     }
 
     public int[] getInputForArray() {
@@ -70,8 +74,60 @@ public class UserInput {
         }
     }
 
+    public boolean getInputForDirected() {
+        System.out.println("Should the graph be directed? (y/N):");
+        String line = scanner.nextLine().trim();
+        return line.equalsIgnoreCase("y") || line.equalsIgnoreCase("yes");
+    }
+
+    public String[] getInputForNodes() {
+        System.out.println("Enter the node names (space-separated):");
+        String input = scanner.nextLine();
+        int i = 0;
+        while (input.trim().isEmpty()) {
+            System.out.println("Input cannot be empty. Please enter the node names (space-separated):");
+            input = scanner.nextLine();
+            i++;
+            if (i > 2) {
+                System.out.println("Too many invalid attempts. Exiting.");
+                System.exit(1);
+            }
+        }
+        return input.trim().split("\\s+");
+    }
+
+    // Returns {from, to}, or null when the user is done
+    public String[] getInputForEdge() {
+        while (true) {
+            System.out.println("Enter an edge as \"from to\" (blank or 'q' to stop):");
+            String line = scanner.nextLine().trim();
+            if (line.isEmpty() || line.equalsIgnoreCase("q")) {
+                return null;
+            }
+            String[] parts = line.split("\\s+");
+            if (parts.length == 2) {
+                return parts;
+            }
+            System.out.println("Please enter exactly two node names, e.g. A B");
+        }
+    }
+
+    public String getInputForNode(String prompt) {
+        System.out.println(prompt);
+        return scanner.nextLine().trim();
+    }
+
     public void dispose() {
         scanner.close();
+    }
+
+    private boolean isValidChoice(String choice, int optionCount) {
+        String trimmed = choice.trim();
+        if (!trimmed.matches("\\d{1,9}")) {
+            return false;
+        }
+        int number = Integer.parseInt(trimmed);
+        return number >= 1 && number <= optionCount;
     }
 
     private String takeInput() {
