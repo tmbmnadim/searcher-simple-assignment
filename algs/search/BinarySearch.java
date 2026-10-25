@@ -8,17 +8,9 @@ public class BinarySearch implements Searcher {
     
     @Override
     public int search(int key) {
-        if(items.length < 1) {
-            System.out.println("Cannot Search in an empty list");
-            return -1;
-        }
-        if(items.length == 1) {
-            System.out.println("Item found at index: 0");
-            return 0;
-        }
         int start = 0;
         int end = items.length - 1;
-        while (start < end) {
+        while (start <= end) {
             int mid = start + (end - start) / 2;
             if(items[mid] == key){
                 System.out.println("Item found at index: " + mid);
